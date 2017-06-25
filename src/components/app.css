@@ -1,0 +1,89 @@
+.cover {
+  width: 150px;
+  height: 200px;
+}
+
+.book-box {
+  width: 200px;
+  height: 400px;
+  margin: 25px auto 25px;
+  /*margin-top: 20px;*/
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #eee;
+  /*word-wrap: break-word;*/
+  /*height:auto;*/
+  overflow: hidden;
+
+}
+
+h3 {
+  overflow: hidden;
+  float: left;
+  padding:5px;
+}
+
+
+.searchForm {
+  display: inline-block;
+  margin-left: 25px;
+  /*margin-right: 0;*/
+  padding: 20px;
+  width:75%;
+}
+
+.add-button {
+  display: inline-block;
+}
+
+.submitButton {
+  float: right;
+}
+
+.input-group {
+  width: 80%;
+}
+
+.edit-button {
+  float: right;
+  border: none;
+  background-color: #eee;
+}
+
+.remove-button {
+  float: left;
+  border: none;
+  background-color: #eee;
+  color: red;
+}
+
+
+.modal-input {
+  margin-bottom: 10px;
+}
+
+
+.top {
+  display: Flex;
+  justify-content: space-between;
+}
+
+.search {
+  padding: 5px;
+	font-size: 22px;
+	color: #ffffff;
+    display:inline;
+	text-align: left;
+}
+
+.add-button {
+  padding: 5px;
+	font-size: 22px;
+	color: #ffffff;
+    display:inline;
+	text-align: right;
+}
+
+.error-msg {
+  color: red
+}
