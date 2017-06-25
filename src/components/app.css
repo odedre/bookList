@@ -1,3 +1,11 @@
+html {
+    max-width: 100%;
+    overflow-x: hidden;
+    z-index: -1;
+    overflow-y: scroll;
+}
+
+
 .cover {
   width: 150px;
   height: 200px;
@@ -5,22 +13,22 @@
 
 .book-box {
   width: 200px;
-  height: 400px;
+  height: 450px;
   margin: 25px auto 25px;
-  /*margin-top: 20px;*/
   padding: 20px;
   border-radius: 5px;
   background-color: #eee;
-  /*word-wrap: break-word;*/
-  /*height:auto;*/
-  overflow: hidden;
-
 }
 
 h3 {
-  overflow: hidden;
+  overflow: auto;
   float: left;
   padding:5px;
+}
+
+.title {
+  height:50px;
+  overflow: inherit;
 }
 
 
@@ -32,9 +40,6 @@ h3 {
   width:75%;
 }
 
-.add-button {
-  display: inline-block;
-}
 
 .submitButton {
   float: right;
@@ -80,8 +85,9 @@ h3 {
   padding: 5px;
 	font-size: 22px;
 	color: #ffffff;
-    display:inline;
+  display:inline;
 	text-align: right;
+  margin: 20px;
 }
 
 .error-msg {

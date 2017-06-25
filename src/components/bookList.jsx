@@ -24,6 +24,7 @@ class BookList extends React.Component {
 
     this.updateChanges = this.updateChanges.bind(this)
     this.removeBook = this.removeBook.bind(this)
+    this.updateSearch = this.updateSearch.bind(this)
   }
 
   componentWillReceiveProps() {
@@ -69,14 +70,25 @@ class BookList extends React.Component {
     }
   }
 
+  // updateSearch(event) {
+  //   this.setState({
+  //     search: event.target.value.substr(0, 10)
+  //   });
+  // }
 
   updateSearch(event) {
+    console.log(event);
+    var change = event
+    console.log(change);
     this.setState({
-      search: event.target.value.substr(0, 10)
+    }, function() {
+      this.setState({search: change})
     });
+    console.log(this.state.search);
   }
 
   render () {
+
     let books = this.state.bookArray.filter(
       (bookName) => {
         return bookName.title.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
@@ -86,6 +98,9 @@ class BookList extends React.Component {
     let addClose = () => this.setState({addShow:false});
     var bookArrayLength = this.state.bookArray.length + 1;
     return (
+      <div>
+        <Search className="search"  change={this.updateSearch} value={this.state.search}/>
+
         <div className='row'>
           {books.map(function (book) {
             return (
@@ -93,7 +108,7 @@ class BookList extends React.Component {
             )
           }.bind(this))}
         </div>
-
+      </div>
     )
   }
 }

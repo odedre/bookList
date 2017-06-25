@@ -49,7 +49,9 @@ class Book extends React.Component {
           <Button className='remove-button glyphicon glyphicon-trash' onClick={() => this.removeBook(this.props.book.id)}  />
           <Button className='edit-button glyphicon glyphicon-pencil' onClick={() => this.changeBook(this.props.book.id)}  />
           <Trigger show={this.state.lgShow} onHide={lgClose} book={this.props.book} change={this.getBookChange} />
-          <h3 >{this.props.book.title}</h3>
+          <div className="title">
+            <h3 >{this.props.book.title}</h3>
+          </div>
           <img src={this.props.book.cover} alt='' className='cover' />
           <h4>Author: <br/>{this.props.book.author}</h4>
           <div>Date: {this.props.book.date}</div>

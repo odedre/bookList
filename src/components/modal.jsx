@@ -107,7 +107,7 @@ class Trigger extends React.Component {
                 id="searchBooks"
                 type="text"
                 name="title"
-                value={this.props.value}
+                // value={this.props.value}
                 placeholder="Change book Title"
                 onChange={this.handleTitleChange.bind(this)} />
               <input

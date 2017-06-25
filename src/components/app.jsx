@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import './app.css'
-import Search from './search'
+// import Search from './search'
 import AddBook from './addBook'
 import Trigger from './modal'
 import BookList from './bookList'
@@ -44,16 +44,6 @@ class App extends React.Component {
     this.setState({bookArray: newArr})
   }
 
-  updateSearch(event) {
-    var change = event.target.value
-    this.setState({
-    }, function() {
-      search: change
-    });
-  }
-
-
-
   render () {
     let books = this.state.bookArray.filter(
       (bookName) => {
@@ -67,7 +57,7 @@ class App extends React.Component {
     return (
       <div>
           <div id="top">
-            <Search className="search"  onChange={this.updateSearch.bind(this)}/>
+
             <div className='add-button '>
               <Button  bsStyle="primary" onClick={()=>this.setState({ addShow: true })}>Add Book</Button>
               <AddBook show={this.state.addShow} onHide={addClose} onAdd={this.addBook} length={bookArrayLength} />

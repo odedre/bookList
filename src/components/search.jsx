@@ -17,8 +17,11 @@ class Search extends React.Component {
 
     this.setState({
       search: input
-      }
-    );
+    }, function() {
+      this.setState({search: input})
+      });
+      this.props.change(input)
+
   }
 
 
@@ -31,8 +34,7 @@ class Search extends React.Component {
             id="searchBooks"
             type="text"
             placeholder="Search for a book"
-            value={this.state.search}
-            onChange={this.updateSearch} />
+            onChange={this.updateSearch.bind(this)} />
         </div>
       </form>
     )
