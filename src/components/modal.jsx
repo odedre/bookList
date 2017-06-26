@@ -81,9 +81,9 @@ class Trigger extends React.Component {
     }
     if(type === 'date' && input != '') {
       let today = this.getTodaysDate()
-      if(today < input) {
+      if(today < input || input < "1900-01-01") {
         this.setState({dateMsg: 'Date is incorrect'})
-        this.flag = false
+        this.dateFlag = false
       } else{
           return input
       }
@@ -130,7 +130,7 @@ class Trigger extends React.Component {
       this.props.onHide()
       var changes = this.state.changesInBook
       changes.id = this.props.book.id
-      this.props.change(changes); 
+      this.props.change(changes);
     }
 
   }
