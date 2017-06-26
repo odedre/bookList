@@ -120,9 +120,7 @@ class Trigger extends React.Component {
     })
 
 
-    // if(!this.flag) {
-    //     this.flag = true
-    // }
+
     if(this.titleFlag && this.authorFlag && this.dateFlag) {
       this.setState({
         titleMsg: '',
@@ -132,7 +130,7 @@ class Trigger extends React.Component {
       this.props.onHide()
       var changes = this.state.changesInBook
       changes.id = this.props.book.id
-      this.props.change(changes); /////////////////
+      this.props.change(changes); 
     }
 
   }
