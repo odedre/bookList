@@ -5,7 +5,7 @@
   "main": "src/index",
   "scripts": {
     "clean": "rm -rf dist && rm -rf ./public/*.bundle.js",
-    "build": "babel ./src -d ./dist/src && node build && webpack",
+    "build": "babel ./src -d ./dist/src && webpack",
     "start": "webpack-dev-server",
     "lint": "standard --fix"
   },

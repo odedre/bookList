@@ -42,9 +42,16 @@ class BookList extends React.Component {
     var newArr = bookArr.filter(function(book) {
       return book.id != id;
     })
+    console.log("bookArr",bookArr);
+    console.log("newArr", newArr);
     if(confirm('are you sure you want to remove this book?')) {
-      this.setState({bookArray: newArr})
+      this.setState({bookArray: newArr}, function() {
+        this.setState({bookArray: newArr})
+      })
     }
+    console.log("bookArr2",bookArr);
+    console.log("newArr2", newArr);
+    this.props.change(newArr)
   }
 
   updateChanges(change) {

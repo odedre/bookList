@@ -21,7 +21,10 @@ class App extends React.Component {
       search: ''
     }
 
+    this.books = null
+
     this.addBook = this.addBook.bind(this)
+    this.checkIfBooksChanged = this.checkIfBooksChanged.bind(this)
   }
 
   componentDidMount() {
@@ -31,21 +34,41 @@ class App extends React.Component {
     var booksJson = axios.get('https://raw.githubusercontent.com/odedre/jsonHost/master/books.json').then(function(data) {
       return data.data.books
     }).then(function(res) {
-      that.setState({
-        bookArray: res
-      })
+      // console.log(that.books);
+      // if(that.books === null) {
+        that.setState({
+          bookArray: res
+        })
+      // } else {
+      //   that.setState({
+      //     bookArray: this.books
+      //   })
+      // }
+
     })
 
   }
 
+  checkIfBooksChanged(newArray) {
+    console.log(newArray)
+    this.books = newArray
+  }
+
   addBook(newBook) {
-    var newArr = this.state.bookArray;
-    newArr.unshift(newBook)
-    this.setState({bookArray: newArr})
+    if(this.books === null) this.books = this.state.bookArray
+    this.books.unshift(newBook)
+    this.setState({bookArray: this.books})
   }
 
   render () {
-    let books = this.state.bookArray.filter(
+    console.log("changed books", this.books);
+    if(this.books === null) {
+        var newArr = this.state.bookArray;
+    }
+    else {
+      var newArr = this.books
+    }
+    let books = newArr.filter(
       (bookName) => {
         return bookName.title.toLowerCase().indexOf(this.state.search.toLowerCase()) != -1;
       }
@@ -64,7 +87,7 @@ class App extends React.Component {
             </div>
           </div>
 
-        <BookList data={books}/>
+        <BookList data={books} change={this.checkIfBooksChanged}/>
       </div>
     )
   }

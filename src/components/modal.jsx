@@ -20,6 +20,10 @@ class Trigger extends React.Component {
     this.flag = true
   }
 
+  // componentDidMount() {
+  //
+  // }
+
   handleTitleChange(e) {
     var title = e.target.value
    this.setState({title: title});
@@ -72,6 +76,13 @@ class Trigger extends React.Component {
       author: validatedAuthor,
       date: validatedDate
     }
+
+    this.setState({
+      title: '',
+      author: '',
+      date: ''
+    })
+
     if(!this.flag) {
       setTimeout(function() {
         this.flag = true
@@ -93,6 +104,7 @@ class Trigger extends React.Component {
   }
 
   render() {
+    // console.log(this.props.book.date);
     return (
       <Modal {...this.props} bsSize="large" aria-labelledby="contained-modal-title-lg">
         <Modal.Header closeButton>
@@ -107,7 +119,7 @@ class Trigger extends React.Component {
                 id="searchBooks"
                 type="text"
                 name="title"
-                // value={this.props.value}
+                defaultValue={this.props.book.title}
                 placeholder="Change book Title"
                 onChange={this.handleTitleChange.bind(this)} />
               <input
@@ -115,6 +127,7 @@ class Trigger extends React.Component {
                 id="searchBooks"
                 type="text"
                 name="author"
+                defaultValue={this.props.book.author}
                 placeholder="Change book Author"
                 onChange={this.handleAuthorChange.bind(this)} />
               <input
@@ -122,6 +135,7 @@ class Trigger extends React.Component {
                 id="searchBooks"
                 type="date"
                 name="date"
+                defaultValue={this.props.book.date}
                 placeholder="Change book Date"
                 onChange={this.handleDateChange.bind(this)} />
             </div>

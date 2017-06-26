@@ -43,6 +43,7 @@ class Book extends React.Component {
     let lgClose = () => this.setState({ lgShow: false });
     let addClose = () => this.setState({addShow:false});
     // let title = this.props.book.title.substr(0,10)
+    // console.log(this.state.pressed);
     return (
       <div className='col-md-3 col-sm-4 col-xs-6' key={this.props.book.id}>
         <div className='book-box' key={this.props.book.id}>

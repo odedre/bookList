@@ -88,6 +88,14 @@ class AddBook extends React.Component {
         cover: validatedUrl,
         id: this.props.length
       }
+      console.log(this.state.changesInBook);
+      this.setState({
+        title: '',
+        author: '',
+        date: '',
+        cover: ''
+      })
+      this.setState({errorMsg: ''})
       this.props.onHide()
       var newBook = this.state.changesInBook
       this.props.onAdd(newBook)
