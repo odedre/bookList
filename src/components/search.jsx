@@ -21,7 +21,6 @@ class Search extends React.Component {
       this.setState({search: input})
       });
       this.props.change(input)
-
   }
 
 

@@ -41,7 +41,6 @@ class App extends React.Component {
   }
 
   checkIfBooksChanged(newArray) {
-    console.log(newArray)
     this.books = newArray
   }
 
@@ -52,7 +51,6 @@ class App extends React.Component {
   }
 
   render () {
-    console.log("changed books", this.books);
     if(this.books === null) {
         var newArr = this.state.bookArray;
     }
@@ -64,10 +62,7 @@ class App extends React.Component {
         return bookName.title.toLowerCase().indexOf(this.state.search.toLowerCase()) != -1;
       }
     )
-
     let addClose = () => this.setState({addShow:false});
-
-
 
     return (
       <div>

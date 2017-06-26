@@ -88,7 +88,6 @@ class AddBook extends React.Component {
         cover: validatedUrl,
         id: this.props.uuid
       }
-      console.log(this.state.changesInBook);
       this.setState({
         title: '',
         author: '',
@@ -112,7 +111,6 @@ class AddBook extends React.Component {
 
 
   render() {
-    // console.log(this.props);
     return (
       <Modal  show={this.props.show} onHide={this.props.hide} bsSize="large" aria-labelledby="contained-modal-title-lg">
         <Modal.Header closeButton>
