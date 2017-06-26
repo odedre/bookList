@@ -7,6 +7,7 @@ import Trigger from './modal'
 import BookList from './bookList'
 import { Button, Modal, ButtonToolbar } from 'react-bootstrap';
 
+var counter = 12
 
 class App extends React.Component {
   constructor (props) {
@@ -29,24 +30,14 @@ class App extends React.Component {
 
   componentDidMount() {
 
-    var that = this
-
-    var booksJson = axios.get('https://raw.githubusercontent.com/odedre/jsonHost/master/books.json').then(function(data) {
-      return data.data.books
-    }).then(function(res) {
-      // console.log(that.books);
-      // if(that.books === null) {
-        that.setState({
+    var booksJson = axios.get('https://raw.githubusercontent.com/odedre/jsonHost/master/books.json')
+      .then(function(data) {
+        return data.data.books
+        }).then(function(res) {
+        this.setState({
           bookArray: res
         })
-      // } else {
-      //   that.setState({
-      //     bookArray: this.books
-      //   })
-      // }
-
-    })
-
+    }.bind(this))
   }
 
   checkIfBooksChanged(newArray) {
@@ -75,7 +66,8 @@ class App extends React.Component {
     )
 
     let addClose = () => this.setState({addShow:false});
-    var bookArrayLength = this.state.bookArray.length + 1;
+
+
 
     return (
       <div>
@@ -83,7 +75,7 @@ class App extends React.Component {
 
             <div className='add-button '>
               <Button  bsStyle="primary" onClick={()=>this.setState({ addShow: true })}>Add Book</Button>
-              <AddBook show={this.state.addShow} onHide={addClose} onAdd={this.addBook} length={bookArrayLength} />
+              <AddBook show={this.state.addShow} onHide={addClose} onAdd={this.addBook} uuid={++counter} />
             </div>
           </div>
 

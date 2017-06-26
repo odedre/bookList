@@ -105,8 +105,14 @@ class Trigger extends React.Component {
 
   render() {
     // console.log(this.props.book.date);
+    // let props =""
+    // let p = this.props
+    // console.log(p);
+    // let {show, ...rest} = props
+    // console.log(props);
+    // console.log(this.props);
     return (
-      <Modal {...this.props} bsSize="large" aria-labelledby="contained-modal-title-lg">
+      <Modal show={this.props.show}  onHide={this.props.onHide}  bsSize="large" aria-labelledby="contained-modal-title-lg">
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-lg">Change Book Details</Modal.Title>
         </Modal.Header>
