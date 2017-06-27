@@ -31,9 +31,10 @@ class Trigger extends React.Component {
   handleTitleChange(e) {
     let title = e.target.value
    this.setState({title: title}, function() {
-     let reg = /\d/
+     var reg = /^[a-z\s]+$/ig
 
-      if(this.state.title === '' || reg.test(title)) {
+      var res = reg.test(this.state.title)
+      if(this.state.title === '' || res === false) {
         this.titleFlag =false
         this.setState({titleMsg: 'Please fill in correct title'})
       } else {
@@ -47,8 +48,10 @@ class Trigger extends React.Component {
   handleAuthorChange(e) {
     let author = e.target.value
    this.setState({author: author}, function() {
-     let reg = /\d/
-     if(this.state.author === '' || reg.test(author)) {
+     let reg = /^[a-z\s]+$/ig
+     var res = reg.test(this.state.author)
+
+     if(this.state.author === '' || res === false) {
        this.authorFlag =false
        this.setState({authorMsg: 'Please fill in correct author'})
      } else {

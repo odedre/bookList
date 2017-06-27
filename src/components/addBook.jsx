@@ -35,8 +35,10 @@ class AddBook extends React.Component {
   handleTitleChange(e) {
     let title = e.target.value
    this.setState({title: title}, function() {
-      let reg = /\d/
-      if(this.state.title === '' || reg.test(title)) {
+     var reg = /^[a-z\s]+$/ig
+
+      var res = reg.test(this.state.title)
+      if(this.state.title === '' || res === false) {
         this.titleFlag =false
         this.setState({titleMsg: 'Please fill in correct title - Only letters are accepted'})
       } else {
@@ -51,8 +53,10 @@ class AddBook extends React.Component {
   handleAuthorChange(e) {
     let author = e.target.value
    this.setState({author: author}, function() {
-     let reg = /\d/
-     if(this.state.author === '' || reg.test(author)) {
+     var reg = /^[a-z\s]+$/ig
+
+      var res = reg.test(this.state.author)
+     if(this.state.author === '' || res === false) {
        this.authorFlag =false
        this.setState({authorMsg: 'Please fill in correct author - Only letters are accepted'})
      } else {
@@ -94,7 +98,7 @@ class AddBook extends React.Component {
   }
 
   validate(input, type) {
-      let reg = /\d/
+      let reg = /^[a-z\s]+$/ig
 
       if(type === 'title') {
         if(reg.test(input) || input == '') {
