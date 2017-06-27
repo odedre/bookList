@@ -31,44 +31,46 @@ class Trigger extends React.Component {
   handleTitleChange(e) {
     let title = e.target.value
    this.setState({title: title}, function() {
-      if(this.state.title === '') {
+     let reg = /\d/
+
+      if(this.state.title === '' || reg.test(title)) {
         this.titleFlag =false
-        this.setState({titleMsg: 'Please fill in title'})
+        this.setState({titleMsg: 'Please fill in correct title'})
       } else {
         this.setState({titleMsg: ''})
         this.titleFlag =true
         this.title = title
       }
    });
-
   }
+
   handleAuthorChange(e) {
     let author = e.target.value
    this.setState({author: author}, function() {
-     if(this.state.author === '') {
+     let reg = /\d/
+     if(this.state.author === '' || reg.test(author)) {
        this.authorFlag =false
-       this.setState({authorMsg: 'Please fill in author'})
+       this.setState({authorMsg: 'Please fill in correct author'})
      } else {
        this.setState({authorMsg: ''})
        this.authorFlag =true
        this.author = author
      }
    });
-
   }
+
   handleDateChange(e) {
     let date = e.target.value
    this.setState({date: date}, function() {
      if(this.state.date === '') {
        this.dateFlag =false
-       this.setState({dateMsg: 'Please fill in date'})
+       this.setState({dateMsg: 'Please fill in correct date'})
      } else {
        this.setState({dateMsg: ''})
        this.dateFlag =true
        this.date = date
      }
    });
-
   }
 
   validate(input, type) {
@@ -150,7 +152,7 @@ class Trigger extends React.Component {
   render() {
 
     return (
-      <Modal show={this.props.show}  onHide={this.props.onHide}  bsSize="large" aria-labelledby="contained-modal-title-lg">
+      <Modal show={this.props.show}  onHide={this.close}  bsSize="large" aria-labelledby="contained-modal-title-lg">
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-lg">Change Book Details</Modal.Title>
         </Modal.Header>

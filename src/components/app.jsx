@@ -1,7 +1,6 @@
 import React from 'react'
 import axios from 'axios'
 import './app.css'
-// import Search from './search'
 import AddBook from './addBook'
 import Trigger from './modal'
 import BookList from './bookList'

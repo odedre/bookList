@@ -13,51 +13,132 @@ class AddBook extends React.Component {
       date: '',
       cover: '',
       changesInBook: {},
-      errorMsg: ''
+      titleMsg: '',
+      authorMsg: '',
+      dateMsg: '',
+      coverMsg: ''
 
     }
+    this.title = ''
+    this.author = ''
+    this.date = ''
+    this.cover = ''
     this.saveValues = this.saveValues.bind(this)
     this.close = this.close.bind(this)
+    this.titleFlag = true
+    this.authorFlag = true
+    this.dateFlag = true
+    this.coverFlag = true
   }
 
 
   handleTitleChange(e) {
-   this.setState({title: e.target.value});
+    let title = e.target.value
+   this.setState({title: title}, function() {
+      let reg = /\d/
+      if(this.state.title === '' || reg.test(title)) {
+        this.titleFlag =false
+        this.setState({titleMsg: 'Please fill in correct title - Only letters are accepted'})
+      } else {
+        this.setState({titleMsg: ''})
+        this.titleFlag =true
+        this.title = title
+      }
+   });
+
   }
+
   handleAuthorChange(e) {
-   this.setState({author: e.target.value});
+    let author = e.target.value
+   this.setState({author: author}, function() {
+     let reg = /\d/
+     if(this.state.author === '' || reg.test(author)) {
+       this.authorFlag =false
+       this.setState({authorMsg: 'Please fill in correct author - Only letters are accepted'})
+     } else {
+       this.setState({authorMsg: ''})
+       this.authorFlag =true
+       this.author = author
+     }
+   });
   }
+
   handleDateChange(e) {
-   this.setState({date: e.target.value});
+    let date = e.target.value
+   this.setState({date: date}, function() {
+     if(this.state.date === '') {
+       this.dateFlag =false
+       this.setState({dateMsg: 'Please fill in date'})
+     } else {
+       this.setState({dateMsg: ''})
+       this.dateFlag =true
+       this.date = date
+     }
+   });
   }
+
+
   handleCoverChange(e) {
-   this.setState({cover: e.target.value});
+    let cover = e.target.value
+   this.setState({cover: cover}, function() {
+     if(this.state.cover === '') {
+       this.coverFlag =false
+       this.setState({coverMsg: 'Please add cover image'})
+     } else {
+       this.setState({coverMsg: ''})
+       this.coverFlag =true
+       this.cover = cover
+     }
+   });
+
   }
 
   validate(input, type) {
-    if(type === 'str') {
-      let val = input.replace(/[^A-Za-z]/gi, '')
-      if(val == "") {
-        this.setState({errorMsg: 'Please fill all fields'})
-      } else {
-        return val[0].toUpperCase() + val.substr(1);
+      let reg = /\d/
+
+      if(type === 'title') {
+        if(reg.test(input) || input == '') {
+          this.titleFlag =false
+          this.setState({titleMsg: 'Please fill in correct title'})
+        }
+        else {
+          let val = input.trim().replace(/[^A-Za-z\s]/gi, '')
+          if(val !== "") {
+            return val[0].toUpperCase() + val.substr(1).toLowerCase();
+          }
+        }
+      }
+      if(type === 'author') {
+        if(reg.test(input) || input == '') {
+          this.authorFlag =false
+          this.setState({authorMsg: 'Please fill in correct author'})
+        }
+        else {
+          let val = input.trim().replace(/[^A-Za-z\s]/gi, '')
+          if(val !== "") {
+            return val[0].toUpperCase() + val.substr(1).toLowerCase();
+          }
+        }
+      }
+      if(type === 'url') {
+        let validUrl = /^(ftp|http|https):\/\/[^ "]+$/.test(input);
+        if(!validUrl || input == '') {
+          this.coverFlag =false
+          this.setState({coverMsg: 'Please fill in correct url'})
+        }
+        else {
+          return input
+        }
       }
 
-    }
     if(type === 'date') {
       let today = this.getTodaysDate()
-      if(today < input || input === '') {
-        this.setState({errorMsg: 'Please fill all fields'})
+      if(today < input || input < "1900-01-01" || input == '') {
+        this.setState({dateMsg: 'Date is incorrect'})
+        this.dateFlag = false
       } else{
           return input
       }
-
-    }
-
-    if(type === 'url' && input == '') {
-      this.setState({errorMsg: 'Please fill all fields'})
-    } else {
-      return input
     }
   }
 
@@ -71,16 +152,15 @@ class AddBook extends React.Component {
   }
 
   saveValues(event){
-    let title = this.state.title
-    let author = this.state.author
-    let date = this.state.date
-    let url = this.state.cover
-    let validatedTitle = this.validate(title, 'str')
-    let validatedAuthor = this.validate(author, 'str')
+    let title = this.title
+    let author = this.author
+    let date = this.date
+    let url = this.cover
+    let validatedTitle = this.validate(title, 'title')
+    let validatedAuthor = this.validate(author, 'author')
     let validatedDate = this.validate(date, 'date')
     let validatedUrl = this.validate(url, 'url')
 
-    if(validatedTitle && validatedAuthor && validatedDate && validatedUrl) {
       this.state.changesInBook = {
         title: validatedTitle,
         author: validatedAuthor,
@@ -94,17 +174,36 @@ class AddBook extends React.Component {
         date: '',
         cover: ''
       })
-      this.setState({errorMsg: ''})
-      this.props.onHide()
-      var newBook = this.state.changesInBook
-      this.props.onAdd(newBook)
-    }
+
+      if(this.titleFlag && this.authorFlag && this.dateFlag && this.coverFlag) {
+        this.setState({
+          titleMsg: '',
+          authorMsg: '',
+          dateMsg: '',
+          coverMsg: ''
+        })
+        this.title = ''
+        this.author = ''
+        this.date = ''
+        this.cover = ''
+        this.props.onHide()
+        var newBook = this.state.changesInBook
+        this.props.onAdd(newBook)
+      }
 
 
   }
 
   close() {
-    this.setState({errorMsg: ''})
+    this.setState({
+      titleMsg: '',
+      authorMsg: '',
+      dateMsg: '',
+      coverMsg: ''
+    })
+    this.titleFlag = true
+    this.authorFlag = true
+    this.dateFlag = true
     this.props.onHide()
   }
 
@@ -112,13 +211,16 @@ class AddBook extends React.Component {
 
   render() {
     return (
-      <Modal  show={this.props.show} onHide={this.props.hide} bsSize="large" aria-labelledby="contained-modal-title-lg">
+      <Modal  show={this.props.show} onHide={this.close} bsSize="large" aria-labelledby="contained-modal-title-lg">
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-lg">Create A New Book</Modal.Title>
 
         </Modal.Header>
         <Modal.Body>
-          <div className="error-msg"><b>{this.state.errorMsg}</b></div>
+          <div className="error-msg"><b>{this.state.titleMsg}</b></div>
+          <div className="error-msg"><b>{this.state.authorMsg}</b></div>
+          <div className="error-msg"><b>{this.state.dateMsg}</b></div>
+          <div className="error-msg"><b>{this.state.coverMsg}</b></div>
           <form className="searchForm" >
             <div className="input-group">
               <input
