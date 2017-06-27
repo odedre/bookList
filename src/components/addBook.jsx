@@ -98,10 +98,10 @@ class AddBook extends React.Component {
   }
 
   validate(input, type) {
-      let reg = /^[a-z\s]+$/ig
+      // let reg = /^[a-z\s]+$/ig
 
       if(type === 'title') {
-        if(reg.test(input) || input == '') {
+        if(input == '') {
           this.titleFlag =false
           this.setState({titleMsg: 'Please fill in correct title'})
         }
@@ -113,7 +113,7 @@ class AddBook extends React.Component {
         }
       }
       if(type === 'author') {
-        if(reg.test(input) || input == '') {
+        if(input == '') {
           this.authorFlag =false
           this.setState({authorMsg: 'Please fill in correct author'})
         }
