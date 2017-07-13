@@ -1,5 +1,5 @@
 
-BootApp - A list of books created in React js for a job interview at Herolo
+BookApp - A list of books created in React js for a job interview at Herolo
 
 To start:
 1. npm install
